@@ -44,11 +44,15 @@ export default function HomePage() {
     t("darkPatches"),
   ]
 
-  const handleCheckRisk = () => {
+  const handleCheckRisk = (e?: React.MouseEvent) => {
+    e?.preventDefault()
+    e?.stopPropagation()
     router.push("/analyze")
   }
 
-  const handleDemoMode = () => {
+  const handleDemoMode = (e?: React.MouseEvent) => {
+    e?.preventDefault()
+    e?.stopPropagation()
     router.push("/analyze?demo=true")
   }
 
@@ -58,8 +62,8 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10" />
-        <div className="container mx-auto px-4 py-20 md:py-32">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10 pointer-events-none" />
+        <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
               <Activity className="h-4 w-4" />
@@ -72,12 +76,23 @@ export default function HomePage() {
             <p className="mb-10 text-lg text-muted-foreground md:text-xl leading-relaxed max-w-2xl mx-auto text-pretty">
               {t("heroDescription")}
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="gap-2 px-8" onClick={handleCheckRisk}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-20">
+              <Button 
+                type="button"
+                size="lg" 
+                className="gap-2 px-8 cursor-pointer relative z-30" 
+                onClick={handleCheckRisk}
+              >
                 {t("checkPcosRisk")}
                 <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="lg" className="gap-2 px-8 bg-transparent" onClick={handleDemoMode}>
+              <Button 
+                type="button"
+                variant="outline" 
+                size="lg" 
+                className="gap-2 px-8 bg-transparent cursor-pointer relative z-30" 
+                onClick={handleDemoMode}
+              >
                 {t("tryDemoMode")}
               </Button>
             </div>
